@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CasWorkshop</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/ownFunctions.js"></script>
+</head>
+<body>
+
+<div data-includeHTML="sections/header.html"></div>
+
+
+Janek
+
+<br/>
+
+<div data-includeHTML="sections/footer.html"></div>
+
+<script>
+    $.getJSON("http://localhost/backend/status/list").then(function (data) {
+        console.log(data);
+
+        var tr = data
+        for (var i = 0; i < data.length; i++) {
+            var tr = $('<tr/>');
+
+            // Indexing into data.report for each td element
+            $(tr).append("<td>" + data[i].Mes + "</td>");
+            $(tr).append("<td>" + data[i].Dia + "</td>");
+            $(tr).append("<td>" + data[i].Local + "</td>");
+            $('.table1').append(tr);
+        }
+
+    });
+</script>
+</body>
+</html>
