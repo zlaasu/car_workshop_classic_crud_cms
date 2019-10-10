@@ -38,31 +38,50 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Add customer</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Edit employee</h6>
                     </div>
                     <div class="card-body">
 
                         <div class="p-5">
                             <form class="user" id="formoid">
-                                <!--                                <input type="text" name="form_id" hidden>-->
+                                <input type="text" name="form_id" hidden>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" name="form_name"
-                                               placeholder="name *" required>
+                                               placeholder="loading..." required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" name="form_lastName"
-                                               placeholder="lastname *" required>
+                                               placeholder="loading..." required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="date" class="form-control form-control-user" name="form_dateOfBirth"
-                                               placeholder="form_dateOfBirth *" required>
+                                        <input type="text" class="form-control form-control-user" name="form_adress"
+                                               placeholder="loading..." required>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" name="form_phoneNumber"
+                                               placeholder="loading..." required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <textarea class="form-control form-control-user" name="form_note"
+                                                  placeholder="loading..." required /></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="number" class="form-control form-control-user" name="form_costPerHour"
+                                               placeholder="loading..." required>
+                                    </div>
+                                </div>
+
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="submit" class="btn btn-primary btn-user btn-block" id="form_submit"
@@ -105,22 +124,48 @@
 
 <script>
 
+    var id = getUrlParameter("form_id");
+
+    $("input[name='form_id']").val(id);
+
+    $(document).ready(function () {
+        $.ajax({
+            url: API_URL + "employee/id/" + id,
+            type: 'get',
+            dataType: "json",
+            success: function (response) {
+                var date = new Date(response.dateOfBirth);
+
+                $("input[name='form_name']").val(response.name);
+                $("input[name='form_lastName']").val(response.lastName);
+                $("input[name='form_adress']").val(response.address);
+                $("input[name='form_phoneNumber']").val(response.phoneNumber);
+                $("textarea[name='form_note']").val(response.note);
+                $("input[name='form_costPerHour']").val(response.costPerHour);
+            }
+        });
+    });
+
     $("#formoid").submit(function (event) {
 
         event.preventDefault();
 
         var data = {};
+        data['id'] = $("input[name='form_id']").val();
         data['name'] = $("input[name='form_name']").val();
         data['lastName'] = $("input[name='form_lastName']").val();
-        data['dateOfBirth'] = $("input[name='form_dateOfBirth']").val();
+        data['address'] = $("input[name='form_adress']").val();
+        data['phoneNumber'] = $("input[name='form_phoneNumber']").val();
+        data['note'] = $("textarea[name='form_note']").val();
+        data['costPerHour'] = $("input[name='form_costPerHour']").val();
 
         $.ajax({
-            url: API_URL + "customer/id/",
-            type: 'put',
+            url: API_URL + "employee/id/",
+            type: 'post',
             dataType: "json",
             data: JSON.stringify(data),
             success: function () {
-                window.location.href = 'customerList.html';
+                window.location.href = 'employeeList.html';
             }
         });
     });
