@@ -21,7 +21,8 @@
 
 <!-- Page Wrapper -->
 <div id="wrapper">
-    <div data-includeHTML="sections/header.html"></div>
+
+    <div data-include="menu"></div>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -53,6 +54,9 @@
                                 <tbody>
                                 </tbody>
                             </table>
+                            <div class="text-center">
+                                <a href="statusAdd.html" style="color: white" class="btn btn-success rolloverBtn" role="button">Add item</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -64,8 +68,6 @@
 
 </div>
 
-
-<div data-includeHTML="sections/footer.html"></div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
@@ -81,6 +83,9 @@
 <script src="vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+
 <script src="js/ownFunctions.js"></script>
 
 <script>
@@ -88,7 +93,7 @@
         $('#dataTable').DataTable({
 
             ajax: {
-                url: "https://workshopsimplecrud-uat.zlasu.org/backend/status/list",
+                url: API_URL + "status/list",
                 dataSrc: ""
             },
 
@@ -99,7 +104,8 @@
                     sortable: false,
                     class: "text-center",
                     "render": function (data, type, full, meta) {
-                        return '<a onClick="edit_row_click(this.id)" id=' + full.id + ' style="color: white" class="btn btn-success rolloverBtn" role="button">Edit</a>' +
+                        return '<a href="statusEdit.html?form_id=' + full.id +
+                            '" style="color: white" class="btn btn-success rolloverBtn" role="button">Edit</a>' +
                             '<spacer> </spacer>' +
                             '<a onClick="delete_row_click(this.id)" id=' + full.id + ' style="color: white" class="btn btn-danger deleteBtn" role="button">Delete</a>';
                     }
@@ -109,15 +115,70 @@
         });
     });
 
-    function edit_row_click(clicked_id)
-    {
-        alert(clicked_id);
+    function delete_row_click(clicked_id) {
+        $.confirm({
+            title: ' ',
+            content: '<b>Are you sure to delete row id: ' + clicked_id + '?</b>',
+
+            buttons: {
+                yes: {
+                    text: 'YES',
+                    btnClass: 'btn btn-danger',
+                    action: function () {
+                        $.ajax({
+                            url: API_URL + 'status/id/' + clicked_id,
+                            type: 'DELETE',
+                            dataType: 'html',
+                            success: function (result) {
+                                $('#' + clicked_id).parents("tr").remove();
+                            }
+                        });
+                    }
+                },
+                space: {
+                    text: ' ',
+                },
+                no: {
+                    text: 'NO',
+                    btnClass: 'btn btn-success'
+                }
+            }
+        });
     }
 
-    function delete_row_click(clicked_id)
-    {
-        alert(clicked_id);
-    }
+    // $(function(){
+    //     var hash = window.location.hash
+    //     if(hash == "#statusAdded") {
+    //         $.confirm({
+    //             title: ' ',
+    //             content: '<b>Are you sure to delete row id: ' + clicked_id + '?</b>',
+    //
+    //             buttons: {
+    //                 yes: {
+    //                     text: 'YES',
+    //                     btnClass: 'btn btn-danger',
+    //                     action: function () {
+    //                         $.ajax({
+    //                             url: API_URL + 'status/id/' + clicked_id,
+    //                             type: 'DELETE',
+    //                             dataType: 'html',
+    //                             success: function (result) {
+    //                                 $('#' + clicked_id).parents("tr").remove();
+    //                             }
+    //                         });
+    //                     }
+    //                 },
+    //                 space: {
+    //                     text: ' ',
+    //                 },
+    //                 no: {
+    //                     text: 'NO',
+    //                     btnClass: 'btn btn-success'
+    //                 }
+    //             }
+    //         });
+    //     }
+    // });
 
 </script>
 
