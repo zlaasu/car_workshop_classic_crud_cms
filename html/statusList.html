@@ -32,7 +32,7 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <br />
+                <br/>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
@@ -47,6 +47,7 @@
                                 <tr>
                                     <th>id</th>
                                     <th>name</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -87,25 +88,37 @@
         $('#dataTable').DataTable({
 
             ajax: {
-                url: "http://localhost/backend/status/list",
+                url: "https://workshopsimplecrud-uat.zlasu.org/backend/status/list",
                 dataSrc: ""
             },
 
             aoColumns: [
                 {mData: 'id'},
-                {mData: 'name'}
-            ],
-
-            select: true,
-
-            dom: 'Bfrtip',
-            buttons: true,
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                {mData: 'name'},
+                {
+                    sortable: false,
+                    class: "text-center",
+                    "render": function (data, type, full, meta) {
+                        return '<a onClick="edit_row_click(this.id)" id=' + full.id + ' style="color: white" class="btn btn-success rolloverBtn" role="button">Edit</a>' +
+                            '<spacer> </spacer>' +
+                            '<a onClick="delete_row_click(this.id)" id=' + full.id + ' style="color: white" class="btn btn-danger deleteBtn" role="button">Delete</a>';
+                    }
+                },
             ]
 
         });
     });
+
+    function edit_row_click(clicked_id)
+    {
+        alert(clicked_id);
+    }
+
+    function delete_row_click(clicked_id)
+    {
+        alert(clicked_id);
+    }
+
 </script>
 
 </body>
