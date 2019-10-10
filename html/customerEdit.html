@@ -38,17 +38,29 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Add status</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Edit customer</h6>
                     </div>
                     <div class="card-body">
 
                         <div class="p-5">
                             <form class="user" id="formoid">
-                                <!--                                <input type="text" name="form_id" hidden>-->
+                                <input type="text" name="form_id" hidden>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" name="form_name"
-                                               placeholder="name *" required>
+                                               placeholder="loading..." required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" name="form_lastName"
+                                               placeholder="loading..." required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="date" class="form-control form-control-user" name="form_dateOfBirth"
+                                               placeholder="loading..." required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -93,21 +105,42 @@
 
 <script>
 
-    $("#formoid").submit(function(event) {
+    var id = getUrlParameter("form_id");
+
+    $("input[name='form_id']").val(id);
+
+    $(document).ready(function () {
+        $.ajax({
+            url: API_URL + "customer/id/" + id,
+            type: 'get',
+            dataType: "json",
+            success: function (response) {
+                var date = new Date(response.dateOfBirth);
+
+                $("input[name='form_name']").val(response.name);
+                $("input[name='form_lastName']").val(response.lastName);
+                $("input[name='form_dateOfBirth']").val(date.toISOString().substr(0, 10));
+            }
+        });
+    });
+
+    $("#formoid").submit(function (event) {
 
         event.preventDefault();
 
         var data = {};
+        data['id'] = $("input[name='form_id']").val();
         data['name'] = $("input[name='form_name']").val();
+        data['lastName'] = $("input[name='form_lastName']").val();
+        data['dateOfBirth'] = $("input[name='form_dateOfBirth']").val();
 
         $.ajax({
-            url: API_URL + "status/id/",
-            type: 'put',
+            url: API_URL + "customer/id/",
+            type: 'post',
             dataType: "json",
             data: JSON.stringify(data),
-            success: function()
-            {
-                window.location.href = 'statusList.html';
+            success: function () {
+                window.location.href = 'customerList.html';
             }
         });
     });

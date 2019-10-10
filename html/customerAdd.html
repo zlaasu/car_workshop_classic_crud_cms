@@ -53,6 +53,18 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" name="form_lastName"
+                                               placeholder="lastname *" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="date" class="form-control form-control-user" name="form_dateOfBirth"
+                                               placeholder="form_dateOfBirth *" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="submit" class="btn btn-primary btn-user btn-block" id="form_submit"
                                                value="SAVE">
                                     </div>
@@ -93,21 +105,22 @@
 
 <script>
 
-    $("#formoid").submit(function(event) {
+    $("#formoid").submit(function (event) {
 
         event.preventDefault();
 
         var data = {};
         data['name'] = $("input[name='form_name']").val();
+        data['lastName'] = $("input[name='form_lastName']").val();
+        data['dateOfBirth'] = $("input[name='form_dateOfBirth']").val();
 
         $.ajax({
-            url: API_URL + "status/id/",
+            url: API_URL + "customer/id/",
             type: 'put',
             dataType: "json",
             data: JSON.stringify(data),
-            success: function()
-            {
-                window.location.href = 'statusList.html';
+            success: function () {
+                window.location.href = 'customerList.html';
             }
         });
     });
