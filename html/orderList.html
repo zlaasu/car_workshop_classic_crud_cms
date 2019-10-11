@@ -98,6 +98,40 @@
 
 <script>
 
+    var cusomers;
+    var statuss;
+    var vehicles;
+
+    $(document).ready(function () {
+        $.ajax({
+            url: API_URL + "customer/list",
+            type: 'get',
+            success: function (data) {
+                cusomers = data;
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            url: API_URL + "status/list",
+            type: 'get',
+            success: function (data) {
+                statuss = data;
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $.ajax({
+            url: API_URL + "vehicle/list",
+            type: 'get',
+            success: function (data) {
+                vehicles = data;
+            }
+        });
+    });
+
     $(document).ready(function () {
         $('#dataTable').DataTable({
 
@@ -107,9 +141,39 @@
             },
             aoColumns: [
                 {mData: 'id'},
-                {mData: 'vehicleId'},
-                {mData: 'statusId'},
-                {mData: 'customerId'},
+                // {mData: 'vehicleId'},
+                // {mData: 'statusId'},
+                // {mData: 'customerId'},
+                {
+                    render: function (data, type, full, meta) {
+                        for (var i = 0; i < vehicles.length; i++){
+                            if (vehicles[i].id == full.vehicleId){
+                                return vehicles[i].brand + " " + vehicles[i].model;
+                            }
+                        }
+                        return "-";
+                    }
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        for (var i = 0; i < statuss.length; i++){
+                            if (statuss[i].id == full.statusId){
+                                return statuss[i].name;
+                            }
+                        }
+                        return "-";
+                    }
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        for (var i = 0; i < cusomers.length; i++){
+                            if (cusomers[i].id == full.customerId){
+                                return cusomers[i].name + " " + cusomers[i].lastName;
+                            }
+                        }
+                        return "-";
+                    }
+                },
                 {mData: 'dateOrderAccepted'},
                 {mData: 'dateRepairStart'},
                 {mData: 'costRepair'},

@@ -60,7 +60,8 @@
                                 </tbody>
                             </table>
                             <div class="text-center">
-                                <a href="vehicleAdd.html" style="color: white" class="btn btn-success rolloverBtn" role="button">Add item</a>
+                                <a href="vehicleAdd.html" style="color: white" class="btn btn-success rolloverBtn"
+                                   role="button">Add item</a>
                             </div>
                         </div>
                     </div>
@@ -94,16 +95,41 @@
 <script src="js/ownFunctions.js"></script>
 
 <script>
+
+    var cusomers;
+
+    $(document).ready(function () {
+        $.ajax({
+            url: API_URL + "customer/list",
+            type: 'get',
+            success: function (data) {
+                cusomers = data;
+            }
+        });
+    });
+
+
+
     $(document).ready(function () {
         $('#dataTable').DataTable({
 
+
             ajax: {
                 url: API_URL + "vehicle/list",
-                dataSrc: ""
+                dataSrc: "",
             },
             aoColumns: [
                 {mData: 'id'},
-                {mData: 'customerId'},
+                {
+                    render: function (data, type, full, meta) {
+                        for (var i = 0; i < cusomers.length; i++){
+                            if (cusomers[i].id == full.customerId){
+                                return cusomers[i].name + " " + cusomers[i].lastName;
+                            }
+                        }
+                        return "-";
+                    }
+                },
                 {mData: 'model'},
                 {mData: 'brand'},
                 {mData: 'yearOfProduction'},
@@ -120,7 +146,6 @@
                     }
                 },
             ]
-
         });
     });
 
