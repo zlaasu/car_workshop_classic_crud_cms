@@ -108,31 +108,34 @@
             type: 'get',
             success: function (data) {
                 cusomers = data;
+                getStatuss();
             }
         });
     });
 
-    $(document).ready(function () {
+    function getStatuss() {
         $.ajax({
             url: API_URL + "status/list",
             type: 'get',
             success: function (data) {
                 statuss = data;
+                getVehicles();
             }
         });
-    });
+    };
 
-    $(document).ready(function () {
+    function getVehicles() {
         $.ajax({
             url: API_URL + "vehicle/list",
             type: 'get',
             success: function (data) {
                 vehicles = data;
+                buildTable();
             }
         });
-    });
+    };
 
-    $(document).ready(function () {
+    function buildTable() {
         $('#dataTable').DataTable({
 
             ajax: {
@@ -193,7 +196,7 @@
             ]
 
         });
-    });
+    };
 
     function delete_row_click(clicked_id) {
         $.confirm({

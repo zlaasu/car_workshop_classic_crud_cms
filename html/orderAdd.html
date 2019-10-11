@@ -48,7 +48,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <select name="cars" class="form-control" id="form_customer_id">
+                                        <select name="cars" class="form-control" id="form_customer_id" required>
                                             <option value="" id="loading">loading...</option>
                                         </select>
                                     </div>
@@ -56,7 +56,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <select name="cars" class="form-control" id="form_status_id">
+                                        <select name="cars" class="form-control" id="form_status_id" required>
                                             <option value="" id="loading">loading...</option>
                                         </select>
                                     </div>
@@ -64,7 +64,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <select name="cars" class="form-control" id="form_vehicle_id">
+                                        <select name="cars" class="form-control" id="form_vehicle_id" required>
                                             <option value="" id="loading">loading...</option>
                                         </select>
                                     </div>
@@ -179,7 +179,7 @@
             url: API_URL + "status/list",
             type: 'get',
             success: function (data) {
-                var s = '<option value="-1" disabled selected>Select status</option>';
+                var s = '<option value="" disabled selected>Select status</option>';
                 for (var i = 0; i < data.length; i++) {
                     s += '<option value="' + data[i].id + '">' + data[i].name + " " + '</option>';
                 }
@@ -193,7 +193,7 @@
             url: API_URL + "vehicle/list",
             type: 'get',
             success: function (data) {
-                var s = '<option value="-1" disabled selected>Select vehicle</option>';
+                var s = '<option value="" disabled selected>Select vehicle</option>';
                 for (var i = 0; i < data.length; i++) {
                     s += '<option value="' + data[i].id + '">' + data[i].brand + " " + data[i].model + " (" + data[i].registrationNumber + ")" + '</option>';
                 }
@@ -207,7 +207,7 @@
             url: API_URL + "customer/list",
             type: 'get',
             success: function (data) {
-                var s = '<option value="-1" disabled selected>Select customer</option>';
+                var s = '<option value="" disabled selected>Select customer</option>';
                 for (var i = 0; i < data.length; i++) {
                     s += '<option value="' + data[i].id + '">' + data[i].name + " " + data[i].lastName + '</option>';
                 }

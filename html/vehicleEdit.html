@@ -49,7 +49,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <select name="cars" class="form-control" id="form_customer_id">
+                                        <select name="cars" class="form-control" id="form_customer_id" required>
                                             <option value="" id="loading">loading...</option>
                                         </select>
                                     </div>
@@ -72,7 +72,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="number" class="form-control form-control-user"
-                                               name="form_yearOfProduction"
+                                               name="form_yearOfProduction" min="1980" max="2030"
                                                placeholder="loading..." required>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
             url: API_URL + "customer/list",
             type: 'get',
             success: function (data) {
-                var s = '<option value="-1" disabled selected>loading...</option>';
+                var s = '<option value="" selected hidden>pick...</option>';
                 for (var i = 0; i < data.length; i++) {
                     s += '<option value="' + data[i].id + '">' + data[i].name + " " + data[i].lastName + '</option>';
                 }
