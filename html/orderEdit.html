@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CasWorkshop</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <div data-include="menu"></div>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <br/>
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Edit order</h6>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="p-5">
+                            <form class="user" id="formoid">
+
+                                <input type="text" name="form_id" hidden>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select name="cars" class="form-control" id="form_customer_id">
+                                            <option value="" id="loading">loading...</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select name="cars" class="form-control" id="form_status_id">
+                                            <option value="" id="loading">loading...</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <select name="cars" class="form-control" id="form_vehicle_id">
+                                            <option value="" id="loading">loading...</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user"
+                                               name="form_dateOrderAccepted"
+                                               placeholder="Date order accepted *" class="textbox-n"
+                                               onfocus="(this.type='date')" id="date" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user"
+                                               name="form_dateRepairStart"
+                                               placeholder="Date order start *" class="textbox-n"
+                                               onfocus="(this.type='date')" id="date" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <textarea class="form-control form-control-user" name="form_problemDescription"
+                                                  placeholder="loading..." required /></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <textarea class="form-control form-control-user" name="form_repairDescription"
+                                                  placeholder="loading..." required /></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="number" class="form-control form-control-user" name="form_costRepair"
+                                               placeholder="loading..." required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="number" class="form-control form-control-user" name="form_costParts"
+                                               placeholder="loading..." required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="number" class="form-control form-control-user" name="form_costPerHour"
+                                               placeholder="loading..." required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="number" class="form-control form-control-user" name="form_numberOfManHours"
+                                               placeholder="loading..." required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="submit" class="btn btn-primary btn-user btn-block" id="form_submit"
+                                               value="SAVE">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+
+<script src="js/ownFunctions.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $.ajax({
+            url: API_URL + "status/list",
+            type: 'get',
+            success: function (data) {
+                var s = '<option value="-1" disabled selected>Select status</option>';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].id + '">' + data[i].name + " " + '</option>';
+                }
+                $("#form_status_id").html(s);
+                getVehicle();
+            }
+        });
+    });
+
+    function  getVehicle() {
+        $.ajax({
+            url: API_URL + "vehicle/list",
+            type: 'get',
+            success: function (data) {
+                var s = '<option value="-1" disabled selected>Select vehicle</option>';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].id + '">' + data[i].brand + " " + data[i].model + " (" + data[i].registrationNumber + ")" + '</option>';
+                }
+                $("#form_vehicle_id").html(s);
+                getCustomer();
+            }
+        });
+    };
+
+    function getCustomer() {
+        $.ajax({
+            url: API_URL + "customer/list",
+            type: 'get',
+            success: function (data) {
+                var s = '<option value="-1" disabled selected>Select customer</option>';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].id + '">' + data[i].name + " " + data[i].lastName + '</option>';
+                }
+                $("#form_customer_id").html(s);
+                setDefault();
+            }
+        });
+    };
+
+    var id = getUrlParameter("form_id");
+
+    $("input[name='form_id']").val(id);
+
+    function setDefault() {
+        $.ajax({
+            url: API_URL + "order/id/" + id,
+            type: 'get',
+            dataType: "json",
+            success: function (response) {
+                var dateAccepted = new Date(response.dateOrderAccepted);
+                var dateStart = new Date(response.dateRepairStart);
+
+                $("#form_customer_id").val(response.customerId).change();
+                $("#form_status_id").val(response.statusId).change();
+                $("#form_vehicle_id").val(response.vehicleId).change();
+
+                $("input[name='form_dateOrderAccepted']").val(dateAccepted.toISOString().substr(0, 10));
+                $("input[name='form_dateRepairStart']").val(dateStart.toISOString().substr(0, 10));
+
+                $("textarea[name='form_problemDescription']").val(response.problemDescription);
+                $("textarea[name='form_repairDescription']").val(response.repairDescription);
+
+                $("input[name='form_costRepair']").val(response.costRepair);
+                $("input[name='form_costParts']").val(response.costParts);
+                $("input[name='form_costPerHour']").val(response.costPerHour);
+                $("input[name='form_numberOfManHours']").val(response.numberOfManHours);
+            }
+        });
+    };
+
+    $("#formoid").submit(function (event) {
+
+        event.preventDefault();
+
+        var data = {};
+        data['id'] = $("input[name='form_id']").val();
+
+        data['customerId'] = $('#form_customer_id :selected').val();
+        data['statusId'] = $('#form_status_id :selected').val();
+        data['vehicleId'] = $('#form_vehicle_id :selected').val();
+
+        data['dateOrderAccepted'] = $("input[name='form_dateOrderAccepted']").val();
+        data['dateRepairStart'] = $("input[name='form_dateRepairStart']").val();
+        data['problemDescription'] = $("textarea[name='form_problemDescription']").val();
+        data['repairDescription'] = $("textarea[name='form_repairDescription']").val();
+        data['costRepair'] = $("input[name='form_costRepair']").val();
+        data['costParts'] = $("input[name='form_costParts']").val();
+        data['costPerHour'] = $("input[name='form_costPerHour']").val();
+        data['numberOfManHours'] = $("input[name='form_numberOfManHours']").val();
+
+        $.ajax({
+            url: API_URL + "order/id/",
+            type: 'post',
+            dataType: "json",
+            data: JSON.stringify(data),
+            success: function () {
+               window.location.href = 'orderList.html';
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
