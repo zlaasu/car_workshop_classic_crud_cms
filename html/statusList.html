@@ -94,12 +94,14 @@
 
             ajax: {
                 url: API_URL + "status/list",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem('token')
-                },
                 dataSrc: "",
+                xhrFields: {
+                    withCredentials: true,
+                    crossDomain: true,
+                    Authorization: "Bearer ...."
+                }
             },
+
 
             aoColumns: [
                 {mData: 'id'},

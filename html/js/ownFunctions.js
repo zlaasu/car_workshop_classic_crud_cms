@@ -1,29 +1,23 @@
 var API_URL = "https://workshopsimplecrud-uat.zlasu.org/backend/";
 //var API_URL = "http://localhost:8080/backend/";
+//var API_URL = "http://localhost/backend/";
 
-$.ajaxSetup({
-    beforeSend: function (xhr)
-    {
-        xhr.setRequestHeader("Accept","application/vvv.website+json;version=1");
-        xhr.setRequestHeader("Authorization",localStorage.token);
-    }
-});
+jQuery.support.cors = true;
+
+// $.ajaxSetup({
+//     beforeSend: function (xhr)
+//     {
+//         xhr.setRequestHeader("Authorization",localStorage.getItem('token'));
+//     }
+// });
 
 
 $( document ).ajaxError(function( event, jqxhr, settings, exception ) {
     if ( jqxhr.status== 401 ) {
         console.log("supa2");
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     }
 });
-
-// $.ajaxSetup({
-//     statusCode: {
-//         401: function(){
-//             // Redirec the to the login page.
-//         }
-//     }
-// });
 
 $(function(){
     var includes = $('[data-include]');
