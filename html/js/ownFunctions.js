@@ -4,12 +4,12 @@ var API_URL = "https://workshopsimplecrud-uat.zlasu.org/backend/";
 
 jQuery.support.cors = true;
 
-// $.ajaxSetup({
-//     beforeSend: function (xhr)
-//     {
-//         xhr.setRequestHeader("Authorization",localStorage.getItem('token'));
-//     }
-// });
+$.ajaxSetup({
+    beforeSend: function (xhr)
+    {
+        xhr.setRequestHeader("Authorization",localStorage.getItem('token'));
+    }
+});
 
 
 $( document ).ajaxError(function( event, jqxhr, settings, exception ) {
